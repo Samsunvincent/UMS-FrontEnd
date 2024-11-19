@@ -1,90 +1,63 @@
-import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import OffCanvas from '../ToggleOffcanvas/Offcanvas';
-import "../ToggleOffcanvas/OffCanvas.css"
+import { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';  // Import Bootstrap CSS
+import './emailVerify.css';  // Import the custom CSS file where @import is handled
 
+import axios from 'axios';
 
-const ProfileComponent = () => {
-    const [profile, setProfile] = useState(null); // Initialize profile state
-    const [loading, setLoading] = useState(false); // Add loading state
-    const navigate = useNavigate(); // Initialize navigate
+export default function EmailVerify() {
+  const [email, setEmail] = useState("");
 
-    const fetchProfile = async () => {
-        setLoading(true); // Set loading state to true
-        let params = new URLSearchParams(window.location.search);
-        let id = params.get('id');
-        let token_key = params.get('login');
-        let token = localStorage.getItem(token_key);
+  const sendEmail = async (event) => {
+    event.preventDefault();
 
-        try {
-            let response = await axios.get(`http://localhost:3000/user/${id}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-            });
-            console.log('Response Data:', response.data); // Log full response data
+    try {
+      let response = await axios.post('http://localhost:3000/forgot-password', { email }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-            // Set profile data using the nested field `response.data.data`
-            setProfile(response.data.data);
-        } catch (error) {
-            console.log("Error fetching profile:", error);
-        } finally {
-            setLoading(false); // Set loading state to false
-        }
-    };
+      console.log("response", response);
 
-    const signout = () => {
-        let params = new URLSearchParams(window.location.search);
-        let token_key = params.get('login');
-        localStorage.removeItem(token_key);
-        navigate('/'); // Redirecting to login page
-    };
+      if (response.status === 200) {
+        alert(response.data.message);
+      } else {
+        alert('User not found');
+      }
 
-    useEffect(() => {
-        fetchProfile(); // Fetch profile data on component mount
-    }, []);
+    } catch (error) {
+      console.log("error", error);
+    }
 
-    return (
-        <>
-            <div className='bg-dark'>
-                <nav>
-                    <div className="d-flex justify-content-between p-5 fs-6">
-                        <div>
-                            <p className="text-white">Employee view</p>
-                        </div>
-                        <div className="d-flex align-items-center gap-5 px-3 text-white">
-                            <div>Home</div>
-                            <div>About</div>
-                            <div>Contact</div>
-                            {/* Pass the complete profile object to the OffCanvas component */}
-                            <div>
-                                <OffCanvas 
-                                    profile={profile} // Pass the entire profile object
-                                    loading={loading} 
-                                    fetchProfile={fetchProfile} 
-                                />
-                            </div>
-                            <div>
-                                <button onClick={signout}>Sign Out</button>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-                <div id="welcome-container">
-                    <div className="text-white p-5 fs-3">
-                        WELCOME {profile?.name || 'Guest'} {/* Display profile name or 'Guest' */}
-                    </div>
-                    <div className="text-white set-welcome px-5 fs-4">
-                        We are thrilled to have you as part of our growing family! At ABC, we believe that our success stems from the collective contributions of each and every one of you. Your skills, passion, and dedication are key to driving us forward.
-                        We are committed to fostering an environment where you can thrive, learn, and grow both personally and professionally. Here, we value collaboration, innovation, and a shared vision for excellence.
-                    </div>
-                </div>
-            </div>
-        </>
-    );
-};
+    // Handle email submission here
+    console.log("Sending reset link to:", email);
+  };
 
-export default ProfileComponent;
+  return (
+    <>
+      <div className="container container1 position-absolute top-50 start-50 translate-middle">
+        <div className="logo">
+          {/* <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Logo" /> */}
+        </div>
+        <div className="verification-box">
+          <h1>Email Verification</h1>
+          <p className="info-text">To continue, please verify your email.</p>
+
+          <form onSubmit={sendEmail}>
+            <input
+              type="email"
+              className="email-input"
+              placeholder="Enter your email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button type="submit" className="verify-button">Send reset link</button>
+          </form>
+
+          <p className="support-text">Not your email? <a href="#">Use another account</a></p>
+        </div>
+      </div>
+    </>
+  );
+}

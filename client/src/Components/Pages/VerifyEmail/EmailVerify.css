@@ -1,67 +1,88 @@
+/* Ensure @import is at the top of the CSS file */
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700');
+
+/* General container styles */
+.container1 {
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  width: 400px;
+}
+
+/* Logo styling */
 .logo img {
-    width: 100px;
-    margin-bottom: 20px;
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  .verification-box h1 {
-    font-size: 24px;
-    color: #202124;
-    margin-bottom: 10px;
-  }
-  
-  .info-text {
-    color: #5f6368;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-  .email-input {
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 15px;
-    border: 1px solid #dadce0;
-    border-radius: 4px;
-    outline: none;
-  }
-  
-  .email-input:focus {
-    border-color: #1a73e8;
-  }
-  .verify-button {
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .verify-button:hover {
-    background-color: #185abc;
-  }
-  .support-text {
-    color: #5f6368;
-    font-size: 14px;
-    margin-top: 15px;
-  }
-  
-  .support-text a {
-    color: #1a73e8;
-    text-decoration: none;
-  }
-  
-  .support-text a:hover {
-    text-decoration: underline;
-  }
-  .container1 {
-    text-align: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    width: 400px;
-  }
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header styling */
+.verification-box h1 {
+  font-size: 24px;
+  color: #202124;
+  margin-bottom: 10px;
+}
+
+/* Info text styling */
+.info-text {
+  color: #5f6368;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Email input styling */
+.email-input {
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Focused email input styling */
+.email-input:focus {
+  border-color: #1a73e8;
+}
+
+/* Submit button styling */
+.verify-button {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Submit button hover styling */
+.verify-button:hover {
+  background-color: #185abc;
+}
+
+/* Support text styling */
+.support-text {
+  color: #5f6368;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+/* Support text link styling */
+.support-text a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+/* Hover effect for support link */
+.support-text a:hover {
+  text-decoration: underline;
+}
