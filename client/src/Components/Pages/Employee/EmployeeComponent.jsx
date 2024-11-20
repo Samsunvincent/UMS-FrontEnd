@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';  // Import Bootstrap CSS
-import './employeeComponent.css';  // Import the custom CSS file where @import is handled
+import './EmployeeComponent.css';  // Import the custom CSS file where @import is handled
 
 import axios from 'axios';
 
